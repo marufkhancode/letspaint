@@ -1,6 +1,12 @@
 // set canvas id to variable
 var canvas = document.getElementById("draw");
 
+document.getElementById("line").addEventListener("click", Linewidth);
+// function to get Line Width from selector
+function Linewidth() {
+    return document.getElementById("line").value;
+}
+
 // get canvas 2D context and set it to the correct size
 var ctx = canvas.getContext("2d");
 resize();
@@ -33,16 +39,13 @@ function draw(e) {
     if (e.buttons !== 1) return; // if mouse is pressed.....
 
     var color = document.getElementById("hex").value;
-    console.log(color);
-    ctx.beginPath(); // begin the drawing path
 
-    ctx.lineWidth = 20; // width of line
+    ctx.beginPath(); // begin the drawing path
+    ctx.lineWidth = Linewidth(); // width of line
     ctx.lineCap = "round"; // rounded end cap
     ctx.strokeStyle = color; // hex color of line
-    console.log(ctx.strokeStyle);
     ctx.moveTo(pos.x, pos.y); // from position
     setPosition(e);
     ctx.lineTo(pos.x, pos.y); // to position
-
     ctx.stroke(); // draw it!
 }
